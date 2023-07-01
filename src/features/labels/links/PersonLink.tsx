@@ -53,10 +53,10 @@ export default function PersonLink({
     >
       {prefix ? (
         <>
-          <Prefix>{prefix}</Prefix>{" "}
+          <Prefix>{prefix}</Prefix>
         </>
       ) : undefined}
-      <Handle item={person} showInstanceWhenRemote={showInstanceWhenRemote} />
+      <Handle item={person} showInstanceWhenRemote={showInstanceWhenRemote} /> 
     </StyledLink>
   );
 }

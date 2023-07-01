@@ -9,6 +9,8 @@ const STORAGE_KEYS = {
   },
   POSTS: {
     TYPE: "appearance--post-type",
+    ENABLE_NEW_ACCOUNTS_HIGHLIGHTIFIER:
+      "appearance--post-enable-new-accounts-highlightifier",
   },
   DARK: {
     USE_SYSTEM: "appearance--dark-use-system",
@@ -31,6 +33,7 @@ interface AppearanceState {
   };
   posts: {
     type: PostAppearanceType;
+    enableNewAccountsHighlightifier: boolean;
   };
   dark: {
     usingSystemDarkMode: boolean;
@@ -45,6 +48,7 @@ const initialState: AppearanceState = {
   },
   posts: {
     type: "large",
+    enableNewAccountsHighlightifier: true,
   },
   dark: {
     usingSystemDarkMode: true,
@@ -59,6 +63,9 @@ const stateFromStorage: AppearanceState = merge(initialState, {
   },
   posts: {
     type: get(STORAGE_KEYS.POSTS.TYPE),
+    enableNewAccountsHighlightifier: get(
+      STORAGE_KEYS.POSTS.ENABLE_NEW_ACCOUNTS_HIGHLIGHTIFIER
+    ),
   },
   dark: {
     usingSystemDarkMode: get(STORAGE_KEYS.DARK.USE_SYSTEM),
@@ -85,6 +92,14 @@ export const appearanceSlice = createSlice({
 
       set(STORAGE_KEYS.POSTS.TYPE, action.payload);
     },
+    setEnableNewAccountsHighlightifier(state, action: PayloadAction<boolean>) {
+      state.posts.enableNewAccountsHighlightifier = action.payload;
+
+      set(
+        STORAGE_KEYS.POSTS.ENABLE_NEW_ACCOUNTS_HIGHLIGHTIFIER,
+        action.payload
+      );
+    },
     setUserDarkMode(state, action: PayloadAction<boolean>) {
       state.dark.userDarkMode = action.payload;
 
@@ -104,6 +119,7 @@ export const {
   setFontSizeMultiplier,
   setUseSystemFontSize,
   setPostAppearance,
+  setEnableNewAccountsHighlightifier,
   setUserDarkMode,
   setUseSystemDarkMode,
 } = appearanceSlice.actions;
